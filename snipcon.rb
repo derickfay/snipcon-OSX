@@ -4,10 +4,6 @@
 # Lee Turner (http://www.leeturner.co)
 # Use and modify freely, attribution appreciated
 # 
-# This script works with the Day One[1] command line utility
-# It parses an input string for an exclamation point prefix to mark starred
-# and/or a [date string] at the beginning to parse natural language dates
-# 
 # Requirements:
 # plist ruby gem
 #
