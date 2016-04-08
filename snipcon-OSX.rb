@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby 
 
-# snipcon.rb
+# snipcon-OSX.rb
+#
+# based on snipcon.rb
 # Lee Turner (http://www.leeturner.co)
 # Use and modify freely, attribution appreciated
 # 
@@ -37,20 +39,23 @@ rescue
 	Process.exit(-1)
 end
 
+snips=[]
+
 # Loop through the snippets in the file.
 snippets.each do |snippet|
 	abbrev = snippet['abbreviation']
 	# Perform any substitutions
 	abbrev = abbrev.gsub(REPLACE_THIS, WITH_THIS)
-	# Output the snippet abbreviation
-	puts "\nsnippet #{abbrev}\n"
 
 	# Grab the actual text of the snippet
 	plainText = snippet['plainText']
-	# Split the lines
-	lines =	plainText.split("\n")
-	# Each line output it with a tab at the front.
-	lines.each do |line|
-		puts "\t #{line.chomp}"
+	# Get the type - we are only interested in type 0 (plain text)
+	snipType = snippet['snippetType']
+
+	if snipType == 0 then 
+		snipHash = {phrase: plainText, shortcut: abbrev} 
+		snips = snips+[snipHash]
 	end
 end
+
+puts snips.to_plist
